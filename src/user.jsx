@@ -1,5 +1,6 @@
 import React from 'react';
 import CustomTable from './dynamicTable';
+import { Button } from 'antd';
 
 const User = () => {
   const columns = [
@@ -18,6 +19,18 @@ const User = () => {
       dataIndex: 'address',
       key: 'address',
     },
+    {
+      title: 'Actions',
+      key: 'actions',
+      render: (_, record) => (
+          <Button 
+            type="link" 
+            onClick={() => console.log('Edit', record)}
+          >
+            Edit
+          </Button>
+      )
+    }
   ];
 
   const data = [
@@ -41,18 +54,13 @@ const User = () => {
     },
   ];
 
-  const handleRowClick = (record) => {
-    console.log('Row clicked:', record);
-  };
-
   return (
     <div>
-      {/* <h1>Custom Table Example</h1> */}
       <CustomTable
+        header="Users"
         columns={columns}
         dataSource={data}
         rowKey="key"
-        onRowClick={handleRowClick}
         pagination={{ pageSize: 5 }}
       />
     </div>

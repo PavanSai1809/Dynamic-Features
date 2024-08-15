@@ -1,27 +1,34 @@
 import React from 'react';
 import { Table } from 'antd';
 
-const CustomTable = ({ columns, dataSource, rowKey, onRowClick, pagination, className }) => {
-  const onRow = (record, rowIndex) => {
-    return {
-      onClick: () => {
-        if (onRowClick) {
-          onRowClick(record, rowIndex);
-        }
-      }
-    };
-  };
+const CustomTable = ({
+  columns,
+  dataSource,
+  rowKey,
+  pagination,
+  className,
+  header,
+  footer,
+  scroll,
+  rowSelection,
+  expandable,
+}) => {
 
   return (
-    <Table
-      className={className}
-      columns={columns}
-      dataSource={dataSource}
-      rowKey={rowKey}
-      onRow={onRow}
-      pagination={pagination}
-      bordered
-    />
+    <div>
+      {header && <h2>{header}</h2>}
+      <Table
+        className={className}
+        columns={columns}
+        dataSource={dataSource}
+        rowKey={rowKey}
+        pagination={pagination}
+        footer={footer ? () => footer : null}
+        scroll={scroll}
+        rowSelection={rowSelection}
+        expandable={expandable}
+      />
+    </div>
   );
 };
 

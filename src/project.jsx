@@ -1,8 +1,7 @@
-
 import React from 'react';
 import CustomTable from './dynamicTable';
 
-const Project = () => {
+const UserList = () => {
   const columns = [
     {
       title: 'Username',
@@ -34,29 +33,34 @@ const Project = () => {
       email: 'jane.smith@example.com',
       role: 'User',
     },
-    {
-      key: '3',
-      username: 'sam_jones',
-      email: 'sam.jones@example.com',
-      role: 'User',
-    },
   ];
 
-  const handleRowClick = (record) => {
-    console.log('User row clicked:', record);
+  const expandable = {
+    expandedRowRender: (record) => <p>{record.email}</p>,
+  };
+
+  const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    },
   };
 
   return (
     <div>
+      <h1>User List</h1>
       <CustomTable
+        header="User Information"
         columns={columns}
         dataSource={data}
         rowKey="key"
-        onRowClick={handleRowClick}
         pagination={{ pageSize: 5 }}
+        footer="End of user list"
+        scroll={{ y: 240 }}
+        rowSelection={rowSelection}
+        expandable={expandable}
       />
     </div>
   );
 };
 
-export default Project;                                                                        
+export default UserList;
